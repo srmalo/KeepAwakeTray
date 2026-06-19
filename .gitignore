@@ -1,0 +1,5 @@
+# Build output
+*.exe
+
+# Local runtime config (created on first run)
+KeepAwakeTray.ini
