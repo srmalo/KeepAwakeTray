@@ -1,0 +1,44 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile with .NET Framework csc
+        shell: pwsh
+        run: |
+          $csc = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+          & $csc /nologo /target:winexe /out:KeepAwakeTray.exe `
+            /reference:System.Windows.Forms.dll /reference:System.Drawing.dll `
+            KeepAwakeTray.cs
+          if (-not (Test-Path KeepAwakeTray.exe)) { throw "Build failed: KeepAwakeTray.exe not produced" }
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KeepAwakeTray
+          path: KeepAwakeTray.exe
+
+      # Publish/refresh a downloadable "latest" release on pushes to main
+      - name: Publish latest release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest build
+          body: Automated build of KeepAwakeTray.exe from the latest commit on main.
+          prerelease: true
+          files: KeepAwakeTray.exe
