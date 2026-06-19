@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="160" viewBox="0 0 540 160" font-family="Segoe UI, Segoe, Arial, sans-serif">
+  <rect width="540" height="160" fill="#ffffff"/>
+  <!-- Green: active - pulsing -->
+  <circle cx="110" cy="54" r="26" fill="#28b446" stroke="#ffffff" stroke-width="2"/>
+  <text x="110" y="104" text-anchor="middle" font-size="15" font-weight="600" fill="#1e1e1e">Green</text>
+  <text x="110" y="126" text-anchor="middle" font-size="12.5" fill="#666666">active &#183; pulsing</text>
+  <!-- Yellow: active - waiting -->
+  <circle cx="270" cy="54" r="26" fill="#e1b928" stroke="#ffffff" stroke-width="2"/>
+  <text x="270" y="104" text-anchor="middle" font-size="15" font-weight="600" fill="#1e1e1e">Yellow</text>
+  <text x="270" y="126" text-anchor="middle" font-size="12.5" fill="#666666">active &#183; outside window</text>
+  <!-- Gray: paused -->
+  <circle cx="430" cy="54" r="26" fill="#828282" stroke="#ffffff" stroke-width="2"/>
+  <text x="430" y="104" text-anchor="middle" font-size="15" font-weight="600" fill="#1e1e1e">Gray</text>
+  <text x="430" y="126" text-anchor="middle" font-size="12.5" fill="#666666">paused</text>
+</svg>

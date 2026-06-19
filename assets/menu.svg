@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="160" viewBox="0 0 220 160" font-family="Segoe UI, Segoe, Arial, sans-serif">
+  <rect width="220" height="160" fill="#f3f3f3"/>
+  <!-- menu panel -->
+  <rect x="14" y="14" width="192" height="132" rx="4" fill="#fbfbfb" stroke="#d2d2d2"/>
+  <!-- Active (checked) -->
+  <text x="26" y="42" font-size="13" font-weight="700" fill="#2878d7">&#10003;</text>
+  <text x="50" y="42" font-size="13" fill="#1e1e1e">Active</text>
+  <!-- Schedule... -->
+  <text x="50" y="74" font-size="13" fill="#1e1e1e">Schedule&#8230;</text>
+  <!-- separator -->
+  <line x1="26" y1="92" x2="194" y2="92" stroke="#e0e0e0"/>
+  <!-- Exit -->
+  <text x="50" y="118" font-size="13" fill="#1e1e1e">Exit</text>
+</svg>

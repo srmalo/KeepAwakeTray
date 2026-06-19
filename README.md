@@ -1,7 +1,13 @@
 # KeepAwakeTray
 
+[![build](https://github.com/srmalo/KeepAwakeTray/actions/workflows/build.yml/badge.svg)](https://github.com/srmalo/KeepAwakeTray/actions/workflows/build.yml)
+
 A tiny Windows system-tray app that keeps your session awake — **without typing
 keystrokes and without moving the cursor**.
+
+> **Download:** grab the latest compiled `KeepAwakeTray.exe` from the
+> [**Releases**](https://github.com/srmalo/KeepAwakeTray/releases/latest) page
+> (built automatically on every push), or build it yourself (see below).
 
 Many corporate environments lock the workstation after a few minutes of
 inactivity (a secure screen saver enforced by policy). Power-only tools (such as
@@ -23,6 +29,22 @@ any character**, so terminals stay clean.
 - Human-editable config file next to the executable.
 - Single self-contained `.exe`, no runtime dependencies beyond .NET Framework
   (already present on Windows 10/11).
+
+## Interface
+
+The tray icon shows the current state at a glance:
+
+![Icon states](assets/icon-states.svg)
+
+Right-click the icon for the menu, and open **Schedule…** to set the time window:
+
+<p>
+  <img src="assets/menu.svg" alt="Context menu" height="160">
+  &nbsp;&nbsp;
+  <img src="assets/schedule-dialog.svg" alt="Schedule dialog" height="210">
+</p>
+
+> Illustrations of the UI (labels and layout match the app).
 
 ## Usage
 

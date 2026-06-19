@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="210" viewBox="0 0 280 210" font-family="Segoe UI, Segoe, Arial, sans-serif">
+  <!-- window -->
+  <rect width="280" height="210" fill="#f0f0f0" stroke="#c8c8c8"/>
+  <!-- title bar -->
+  <rect width="280" height="30" fill="#0078d7"/>
+  <text x="12" y="20" font-size="13" fill="#ffffff">Schedule</text>
+  <text x="259" y="21" font-size="16" fill="#ffffff">&#215;</text>
+
+  <!-- Start time -->
+  <text x="20" y="63" font-size="13" fill="#1e1e1e">Start time:</text>
+  <rect x="130" y="46" width="90" height="24" fill="#ffffff" stroke="#aaaaaa"/>
+  <text x="140" y="63" font-size="13" fill="#141414">08:00</text>
+  <rect x="202" y="46" width="18" height="24" fill="#f4f4f4" stroke="#aaaaaa"/>
+  <text x="206" y="58" font-size="7" fill="#505050">&#9650;</text>
+  <text x="206" y="68" font-size="7" fill="#505050">&#9660;</text>
+
+  <!-- End time -->
+  <text x="20" y="97" font-size="13" fill="#1e1e1e">End time:</text>
+  <rect x="130" y="80" width="90" height="24" fill="#ffffff" stroke="#aaaaaa"/>
+  <text x="140" y="97" font-size="13" fill="#141414">19:00</text>
+  <rect x="202" y="80" width="18" height="24" fill="#f4f4f4" stroke="#aaaaaa"/>
+  <text x="206" y="92" font-size="7" fill="#505050">&#9650;</text>
+  <text x="206" y="102" font-size="7" fill="#505050">&#9660;</text>
+
+  <!-- checkbox -->
+  <rect x="20" y="118" width="16" height="16" fill="#ffffff" stroke="#646464"/>
+  <text x="22" y="131" font-size="12" font-weight="700" fill="#2878d7">&#10003;</text>
+  <text x="44" y="131" font-size="13" fill="#1e1e1e">Weekdays only (Mon-Fri)</text>
+
+  <!-- buttons -->
+  <rect x="50" y="152" width="80" height="28" rx="2" fill="#0078d7" stroke="#0067bb"/>
+  <text x="90" y="171" text-anchor="middle" font-size="13" fill="#ffffff">Save</text>
+  <rect x="150" y="152" width="80" height="28" rx="2" fill="#fdfdfd" stroke="#969696"/>
+  <text x="190" y="171" text-anchor="middle" font-size="13" fill="#141414">Cancel</text>
+</svg>
