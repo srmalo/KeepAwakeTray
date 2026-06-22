@@ -22,7 +22,7 @@ jobs:
         run: |
           $csc = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
           & $csc /nologo /target:winexe /out:KeepAwakeTray.exe `
-            /reference:System.Windows.Forms.dll /reference:System.Drawing.dll `
+            /reference:System.dll /reference:System.Drawing.dll /reference:System.Windows.Forms.dll `
             KeepAwakeTray.cs
           if (-not (Test-Path KeepAwakeTray.exe)) { throw "Build failed: KeepAwakeTray.exe not produced" }
 
