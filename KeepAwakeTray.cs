@@ -238,8 +238,10 @@ namespace KeepAwakeTray {
                 f.ShowInTaskbar = false;
                 Point cur = Cursor.Position;                  // where the tray menu was just clicked
                 Rectangle wa = Screen.FromPoint(cur).WorkingArea;
-                int fx = Math.Min(Math.Max(wa.Left, cur.X - f.Width),  wa.Right  - f.Width);
-                int fy = Math.Min(Math.Max(wa.Top,  cur.Y - f.Height), wa.Bottom - f.Height);
+                int dx = P(-304);                             // horizontal offset from cursor anchor (px@96dpi): + = left, - = right
+                int dy = P(19);                               // vertical offset: + = down, - = up
+                int fx = Math.Min(Math.Max(wa.Left, cur.X - f.Width  - dx), wa.Right  - f.Width);
+                int fy = Math.Min(Math.Max(wa.Top,  cur.Y - f.Height + dy), wa.Bottom - f.Height);
                 f.Location = new Point(fx, fy);
 
                 Label l1 = new Label(); l1.Text = "Start time:"; l1.SetBounds(P(20), P(24), P(90), P(20));
