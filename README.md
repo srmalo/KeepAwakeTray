@@ -49,12 +49,25 @@ Right-click the icon for the menu, and open **Schedule…** to set the time wind
 ## Usage
 
 - **Double-click** the tray icon → toggle active/paused.
+- **Right-click → Keep Active (ignore schedule)** → session override: keep awake
+  regardless of the schedule (also forces Active). Not persisted — resets to the
+  schedule when the process restarts.
 - **Right-click → Schedule…** → set start/end time (`HH:mm`) and the
   weekdays-only option. Changes apply immediately and are saved.
 - **Right-click → Exit** → quit.
 
-It sends a pulse every 50 seconds, but **only** when **active** *and* inside the
-configured window (and, if enabled, on weekdays only).
+It sends a pulse every 50 seconds, but **only** when **active** *and*
+(**Keep Active** *or* inside the configured window) — and, if enabled, on
+weekdays only.
+
+The `-keepon` command-line flag starts the app with Keep Active already on
+(handy for an "always on" shortcut).
+
+> **Note on elevated apps:** if you run apps **as administrator** (e.g. an
+> elevated terminal), run KeepAwakeTray elevated too. Windows (UIPI) blocks a
+> normal-integrity process from sending input to a higher-integrity foreground
+> window, so a non-elevated KeepAwakeTray won't keep the session awake while an
+> elevated window is focused.
 
 ### Icon states
 

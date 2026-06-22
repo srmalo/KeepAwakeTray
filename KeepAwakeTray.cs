@@ -19,9 +19,10 @@ using System.Windows.Forms;
 namespace KeepAwakeTray {
     static class Program {
         [STAThread]
-        static void Main() {
+        static void Main(string[] args) {
             Application.EnableVisualStyles();
-            Application.Run(new TrayApp());
+            bool keepOn = Array.IndexOf(args, "-keepon") >= 0;
+            Application.Run(new TrayApp(keepOn));
         }
     }
 
@@ -40,17 +41,20 @@ namespace KeepAwakeTray {
         Timer timer;
         Icon iconOn, iconWait, iconOff;
         MenuItem miToggle;
+        MenuItem miKeep;
 
         // State
         bool active = true;
+        bool bypassSchedule = false;   // "Keep Active": override de sesion, NO se persiste
         TimeSpan startT = new TimeSpan(8, 0, 0);
         TimeSpan endT   = new TimeSpan(19, 0, 0);
         bool weekdaysOnly = true;
 
         string IniPath { get { return Path.Combine(Application.StartupPath, "KeepAwakeTray.ini"); } }
 
-        public TrayApp() {
+        public TrayApp(bool keepOn) {
             LoadConfig();
+            if (keepOn) { bypassSchedule = true; active = true; }   // -keepon: arranca con Keep Active (override de sesion, no se persiste)
 
             iconOn   = MakeIcon(Color.FromArgb(40, 180, 70));    // green  = pulsing
             iconWait = MakeIcon(Color.FromArgb(225, 185, 40));   // yellow = waiting
@@ -58,10 +62,12 @@ namespace KeepAwakeTray {
 
             miToggle = new MenuItem("Active", OnToggle);
             miToggle.Checked = active;
+            miKeep = new MenuItem("Keep Active (ignore schedule)", OnKeepActive);
+            miKeep.Checked = bypassSchedule;
             MenuItem miConfig = new MenuItem("Schedule...", OnConfig);
             MenuItem miExit = new MenuItem("Exit", OnExit);
             ContextMenu menu = new ContextMenu(new MenuItem[] {
-                miToggle, miConfig, new MenuItem("-"), miExit
+                miToggle, miKeep, miConfig, new MenuItem("-"), miExit
             });
 
             tray = new NotifyIcon();
@@ -87,16 +93,34 @@ namespace KeepAwakeTray {
             return t >= startT || t < endT;                          // window that crosses midnight
         }
 
+        // Pulsa si esta activo y (override "Keep Active" o dentro de la ventana)
+        bool ShouldPulse() { return active && (bypassSchedule || InWindow()); }
+
         void OnTick(object sender, EventArgs e) {
-            if (active && InWindow()) Nudge();
+            if (ShouldPulse()) Nudge();
             UpdateIcon();  // refresh color in case the window boundary was crossed
         }
 
         void OnToggle(object sender, EventArgs e) {
             active = !active;
+            if (!active) {                 // pausar manualmente cancela el override
+                bypassSchedule = false;
+                miKeep.Checked = false;
+            }
             miToggle.Checked = active;
             UpdateIcon();
-            if (active && InWindow()) Nudge();
+            if (ShouldPulse()) Nudge();
+        }
+
+        void OnKeepActive(object sender, EventArgs e) {
+            bypassSchedule = !bypassSchedule;
+            if (bypassSchedule) {          // "Keep Active" implica activar
+                active = true;
+                miToggle.Checked = true;
+            }
+            miKeep.Checked = bypassSchedule;
+            UpdateIcon();
+            if (ShouldPulse()) Nudge();
         }
 
         void UpdateIcon() {
@@ -105,6 +129,9 @@ namespace KeepAwakeTray {
             if (!active) {
                 tray.Icon = iconOff;
                 tray.Text = "KeepAwake: paused";
+            } else if (bypassSchedule) {
+                tray.Icon = iconOn;
+                tray.Text = "KeepAwake: active (schedule bypassed - Keep Active)";
             } else if (InWindow()) {
                 tray.Icon = iconOn;
                 tray.Text = "KeepAwake: active (" + win + ")";
